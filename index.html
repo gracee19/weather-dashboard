@@ -31,29 +31,36 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="box-background col-md-9">
-                        <div id="place-name" class="currentDay"></div>
+                        <div><span id="place-name"></span> - <span class="currentDay"></span></div>
                         <div id="tempt"></div>
                         <div id="humid"></div>
                         <div id="windSpeed"></div>
-                        <div id="uv-i"></div>
+                        <div id="uv-i" class="indicator"></div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-9">
                         <h1>5-Day Forecast:</h1>
-                        <div id="day-1"></div>
-                        <div id="day-2"></div>
-                        <div id="day-3"></div>
-                        <div id="day-4"></div>
-                        <div id="day-5"></div>
+                        <div class="day-1" id="box1">
+                            <p id="1"></p>
+                        </div>
+                        <div class="day-2" id="box2">
+                            <p id="2"></p>
+                        </div>
+                        <div class="day-3" id="box3">
+                            <p id="3"></p>
+                        </div>
+                        <div class="day-4" id="box4">
+                            <p id="4"></p>
+                        </div>
+                        <div class="day-5" id="box5">
+                            <p id="5"></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -63,6 +70,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="index.js"></script>
 </body>
 

@@ -31,15 +31,18 @@
     border-radius: 10px;
     background-color: lightcyan;
 }
-.box-background{
-    border: thick;
-    border-color: black;
-}
 #place-name{
     font-size: 40px;
     font-weight: bold;
 }
 #tempt, #humid, #windSpeed, #uv-i{
     font-size: x-large;
-
+}
+.currentDay{
+    font-size: 30px;
+    font-weight: bold;
+}
+#box-background{
+    border: thin;
+    border-color: slategrey;
 }
