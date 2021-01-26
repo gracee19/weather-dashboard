@@ -27,9 +27,8 @@
     color: whitesmoke;
 }
 .col-md-9{
-    border: thin;
-    border-radius: 10px;
-    background-color: lightcyan;
+    background-color: transparent;
+    margin: auto;
 }
 #place-name{
     font-size: 40px;
@@ -42,11 +41,40 @@
     font-size: 30px;
     font-weight: bold;
 }
-#box-background{
-    border: thin;
-    border-color: slategrey;
+.box-background{
+    border: solid;
+    border-radius: 10px;
+    background-color: lightcyan;
+    padding: 25px;
 }
 .forecast-box{
-    border: thick;
-    border-color: slategrey;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    border:solid;
+    border-width: thin;
+    border-color: black;
+    border-radius: 10px;
+    background-color: skyblue;
+    color: white;
+    font-size: 25px;
+    
+}
+.indicator-success{
+    color: #22bb33;
+
+}
+.indicator-danger{
+    color: #bb2124;
+}
+.indicator-warning{
+    color: #f0ad4e;
+}
+
+img{
+    width: 80px;
+    height: 80px;
+}
+.col-md-12{
+    padding: 20px;
 }
