@@ -46,3 +46,7 @@
     border: thin;
     border-color: slategrey;
 }
+.forecast-box{
+    border: thick;
+    border-color: slategrey;
+}

@@ -29,7 +29,7 @@ $(document).ready(function () {
                 url: uvURL,
                 method: "GET",
             }).then(function (response) {
-                console.log(response);
+                // console.log(response);
                 $("#uv-i").text("UV Index: " + response.value);
 
                 if (response.value > 7) {
@@ -65,21 +65,27 @@ $(document).ready(function () {
                 url: forecastURL,
                 method: "GET",
             }).then(function (response) {
-                console.log(response);
-                $("#day-1").text(JSON.stringify(response.list));
+                // console.log(response);
+                $("#forecast").text(JSON.stringify(response.list));
+                console.log(response.list);
+                $("#forecast").empty();
+                $("#dailyForecast").empty();
                 for (var i = 0; i < response.list.length; i++) {
                     // console.log("1");
                     // response.list[i].dt_txt
                     if (response.list[i].dt_txt.includes("12:00")) {
-                        // console.log(response.list[i])
-                        $("#1").text(response.list[i]);
-                        // $("#day-2").text(response.list[]);
-                        // $("#day-3").text(response.list);
-                        // $("#day-4").text(response.list);
-                        // $("#day-4").text(response.list);
-                    }
-                    else{
-                        return;
+                        // console.log(response.list[i].main.temp);
+                        var day = $("<div>").addClass("forecast-box");
+                        var p2 = $("<p>").text(response.list[i].dt_txt)
+                        var p = $("<p>").text("Temperature: " + response.list[i].main.temp + "°F");
+                        var p1 = $("<p>").text("Humidity: " + response.list[i].main.humidity + "%")
+                        
+                        day.append(p2)
+                        day.append(p);
+                        day.append(p1);
+                        
+                        $("#dailyForecast").append(day);
+                        
                     }
                 }
 
