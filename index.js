@@ -23,9 +23,11 @@ $(document).ready(function () {
 
             $("#icon").empty();
 
+            //UV Inde
             var lon = response.coord.lon;
             var lat = response.coord.lat;
-            // uv index
+            const celsius = (response.main.temp - 273).toFixed(2);
+            // UV URL
             var uvURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=44d3bab9c0874cb28adefc58849abffd`;
 
 
@@ -39,21 +41,21 @@ $(document).ready(function () {
 
                 if (response.value > 7) {
                     $("#uv-i").removeClass();
-                    $("#uv-i").addClass("indicator indicator-danger");
+                    $("#uv-i").addClass("indicator uvResult-danger");
                 }
                 else if (response.value < 3) {
                     $("#uv-i").removeClass();
-                    $("#uv-i").addClass("indicator indicator-success");
+                    $("#uv-i").addClass("indicator uvResult-success");
                 }
                 else if (response.value > 3 && response.value < 7) {
                     $("#uv-i").removeClass()
-                    $("#uv-i").addClass("indicator indicator-warning");
+                    $("#uv-i").addClass("indicator uvResult-warning");
                 }
             });
             // appending the searched places temperature and stuffs
             $("#place-name").text(response.name);
             $("#icon").append(currentIcon);
-            $("#tempt").text("Temperature: " + response.main.temp + "°F");
+            $("#tempt").text("Temperature: " + celsius + " °C");
             $("#humid").text("Humidity: " + response.main.humidity + "%");
             $("#windSpeed").text("Wind Speed: " + response.wind.speed + "MPH");
 
@@ -62,11 +64,7 @@ $(document).ready(function () {
             // API for weather and append
 
             var forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCity}&appid=44d3bab9c0874cb28adefc58849abffd`;
-
-
             var cDate = $('.currentDay');
-
-
 
             // appending the 5day forecast
             $.ajax({
@@ -81,15 +79,16 @@ $(document).ready(function () {
                 for (var i = 0; i < response.list.length; i++) {
                     // console.log("1");
                     // response.list[i].dt_txt
-                    if (response.list[i].dt_txt.includes("12:00")) {
+                    if (response.list[i].dt_txt.includes("00:00:00")) {
                         // console.log(response.list[i]);
                         var day = $("<div>").addClass("forecast-box");
                         var p2 = $("<p>").text(response.list[i].dt_txt);
                         var wIcon = $("<img>").attr("src", "https://api.openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
-                        var p = $("<p>").text("Temp: " + response.list[i].main.temp + "°F");
+                        var cTemp = (response.list[i].main.temp - 273).toFixed(2);
+                        var p = $("<p>").text("Temp: " + cTemp + " °C");
                         var p1 = $("<p>").text("Humidity: " + response.list[i].main.humidity + "%")
 
-                        
+
                         day.append(p2);
                         day.append(wIcon);
                         day.append(p);
@@ -97,16 +96,17 @@ $(document).ready(function () {
 
                         $("#dailyForecast").append(day);
 
-                    }
-                }
+                    };
+                };
 
 
             });
+
             cDate.text(moment().format('L'));
 
             function clearSearch() {
                 $("#search-text").trigger('reset');
-            }
+            };
             clearSearch()
         });
 

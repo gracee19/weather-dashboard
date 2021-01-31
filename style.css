@@ -58,17 +58,32 @@
     background-color: skyblue;
     color: white;
     font-size: 25px;
+}
+
+.uvResult-success{
+    border: solid;
+    border-width: thin;
+    border-radius: 3px;
+    border-color: #22bb33;
+    background-color: #22bb33;
+    color: white;
+}
+.uvResult-danger{
+    border: solid;
+    border-width: thin;
+    border-radius: 3px;
+    border-color: #bb2124;
+    background-color:#bb2124 ;
+    color:white;
     
 }
-.indicator-success{
-    color: #22bb33;
-
-}
-.indicator-danger{
-    color: #bb2124;
-}
-.indicator-warning{
-    color: #f0ad4e;
+.uvResult-warning{
+    border: solid;
+    border-width: thin;
+    border-radius: 3px;
+    border-color: #f0ad4e;
+    background-color: #f0ad4e;
+    color: white;
 }
 
 img{
