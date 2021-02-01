@@ -1,4 +1,18 @@
+var searchCity = "";
+var searchList;
+searchCityEl = $("#search-text"); 
+// var city = $("#search-text");
+
 $(document).ready(function () {
+
+    if (localStorage.getItem("searchedCity") == null) {
+        searchList = [];
+        localStorage.setItem("searchedCity", JSON.stringify(searchList));
+    } else {
+        searchList = JSON.parse(localStorage.getItem("searchedCity"));
+        for (var i = 0; i < searchList.length; i++) {
+        }
+    }
 
     $('#search-text').hide();
     $('#search-button, #search-text').show();
@@ -6,11 +20,11 @@ $(document).ready(function () {
     // onClick searchbutton
     $("#search-button").click(function (e) {
         e.preventDefault()
-        var searchCity = "";
-        searchCity = $("#search-text").val();
+        searchList.push(searchCityEl.val());
+        localStorage.setItem("searchedCity",JSON.stringify(searchList));
 
         // Query url
-        var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=44d3bab9c0874cb28adefc58849abffd`;
+        var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchCityEl.val()}&appid=44d3bab9c0874cb28adefc58849abffd`;
 
         $.ajax({
             url: queryURL,
@@ -63,7 +77,7 @@ $(document).ready(function () {
 
             // API for weather and append
 
-            var forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCity}&appid=44d3bab9c0874cb28adefc58849abffd`;
+            var forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCityEl.val()}&appid=44d3bab9c0874cb28adefc58849abffd`;
             var cDate = $('.currentDay');
 
             // appending the 5day forecast
@@ -82,7 +96,7 @@ $(document).ready(function () {
                     if (response.list[i].dt_txt.includes("00:00:00")) {
                         // console.log(response.list[i]);
                         var day = $("<div>").addClass("forecast-box");
-                        var p2 = $("<p>").text(response.list[i].dt_txt);
+                        var p2 = $("<p>").text(response.list[i].dt_txt.slice(0, -9));
                         var wIcon = $("<img>").attr("src", "https://api.openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
                         var cTemp = (response.list[i].main.temp - 273).toFixed(2);
                         var p = $("<p>").text("Temp: " + cTemp + " °C");
