@@ -1,28 +1,34 @@
 var searchCity = "";
-var searchList;
+var searchList = [];
 searchCityEl = $("#search-text");
-// var city = $("#search-text");
 
 $(document).ready(function () {
 
-    if (localStorage.getItem("searchedCity") == null) {
-        searchList = [];
-        localStorage.setItem("searchedCity", JSON.stringify(searchList));
-    } else {
-        searchList = JSON.parse(localStorage.getItem("searchedCity"));
-        for (var i = 0; i < searchList.length; i++) {
-            
-        }
-    }
+    searchList = JSON.parse(localStorage.getItem("searchedCity")) || [];
+    renderHistory(searchList);
 });
+
+function renderHistory(searchList) {
+    $(".search-area").empty();
+    searchList.forEach(function (city) {
+        var hButton = $("<button>");
+        hButton.text(city);
+        $(".search-area").append(hButton,"<br>");
+    });
+};
+
+function saveCity(city) {
+    searchList.push(city);
+    localStorage.setItem("searchedCity", JSON.stringify(searchList));
+    renderHistory(searchList);
+}
+
 $('#search-text').hide();
 $('#search-button, #search-text').show();
 
 // onClick searchbutton
 $("#search-button").click(function (e) {
     e.preventDefault()
-    searchList.push(searchCityEl.val());
-    localStorage.setItem("searchedCity", JSON.stringify(searchList));
 
     // Query url
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchCityEl.val()}&appid=44d3bab9c0874cb28adefc58849abffd`;
@@ -31,7 +37,7 @@ $("#search-button").click(function (e) {
         url: queryURL,
         method: "GET",
     }).then(function (response) {
-        //  console.log(response);
+        saveCity(response.name);
         var currentIcon = $("<img>");
         currentIcon.attr("src", "https://api.openweathermap.org/img/w/" + response.weather[0].icon + ".png"
         );
